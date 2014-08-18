@@ -1,4 +1,6 @@
 require 'sinatra'
+require 'pony'
+require 'haml'
 
 get '/' do
   'hello - divya'
@@ -11,4 +13,18 @@ end
 
 post '/sendemail' do
 	'sending email'
+	options = {
+    :to => 'divyasankaran@gmail.com',
+    :from => 'divyaemailtest@gmail.com',
+    :subject => 'Test',
+    :body => 'Test Again',
+    :via => :smtp,
+    :via_options => {
+      :address => 'smtp.gmail.com',
+      :port => 587,
+      :user_name => 'divyaemailtest@gmail.com',
+      :password => 'divyaemail'
+    }
+}
+Pony.mail(options)
 end
