@@ -4,7 +4,6 @@ require 'haml'
 require 'json'
 require './config/config_env.rb'
 
-
 get '/' do
   'hello - divya'
 end
@@ -14,17 +13,25 @@ get '/testget/:name' do
 end
 
 post '/sendemail' do
-	'sending email'
+	
+inputParams = request.body.read
+puts send(inputParams)
+end
+
+
+def send(inputParams)
+
+'sending email'
 	
 
 	begin
-		params = JSON.parse request.body.read #.to_s
+		params = JSON.parse inputParams #.to_s
 		#"param received: #{params['subject']}" #.to_s}"
 	rescue
 		return "invalid post data"
 	end
 
-	#check params
+	#check validitity of params
 	begin
 		params.has_value?('subject')
 		   if params['subject'].empty? || params['subject'].nil?
@@ -52,7 +59,7 @@ post '/sendemail' do
 			return 'missing "body" parameter'
 	end
 
-
+# create options object for sending email
 	options = {
     :to => "#{params['to']}",
     :from => 'noreply@example.com',
@@ -74,4 +81,4 @@ rescue
 	return 'Email send failed.'
 end
 
-end
+end #end method
