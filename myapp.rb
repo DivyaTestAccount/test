@@ -19,7 +19,7 @@ post '/sendemail' do
 	#"param received: #{params['subject']}" #.to_s}"
 
 	options = {
-    :to => 'divyaemailtest@gmail.com',
+    :to => "#{params['to']}",
     :from => 'noreply@example.com',
     :subject => "#{params['subject']}",
     :body => "#{params['body']}",
