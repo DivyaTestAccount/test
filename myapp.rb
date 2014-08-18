@@ -2,6 +2,8 @@ require 'sinatra'
 require 'pony'
 require 'haml'
 require 'json'
+require './config/config_env.rb'
+
 
 get '/' do
   'hello - divya'
@@ -60,8 +62,8 @@ post '/sendemail' do
     :via_options => {
       :address => 'smtp.gmail.com',
       :port => 587,
-      :user_name => 'divyaemailtest@gmail.com',
-      :password => 'divyaemail'
+      :user_name => ENV['GMAIL_USERNAME'],
+      :password => ENV['GMAIL_PASSWORD']
   	}
 }
 

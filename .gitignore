@@ -1,2 +1,2 @@
 .*.swp
-config_env.rb
+/config/config_env.rb
