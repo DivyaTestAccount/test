@@ -13,18 +13,22 @@ end
 
 post '/sendemail' do
 	'sending email'
+	
+	#"param received: #{params[:test]}"
+
 	options = {
     :to => 'divyaemailtest@gmail.com',
     :from => 'noreply@example.com',
-    :subject => 'Test',
-    :body => 'Test Again',
+    :subject => "#{params[:subject]}",
+    :body => "#{params[:body]}",
     :via => :smtp,
     :via_options => {
       :address => 'smtp.gmail.com',
       :port => 587,
       :user_name => 'divyaemailtest@gmail.com',
       :password => 'divyaemail'
-    }
+  	}
 }
+
 Pony.mail(options)
 end
