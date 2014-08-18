@@ -11,12 +11,45 @@ get '/testget/:name' do
   "hello , #{params[:name]}"
 end
 
-
 post '/sendemail' do
 	'sending email'
 	
-	params = JSON.parse request.body.read #.to_s
-	#"param received: #{params['subject']}" #.to_s}"
+
+	begin
+		params = JSON.parse request.body.read #.to_s
+		#"param received: #{params['subject']}" #.to_s}"
+	rescue
+		return "invalid post data"
+	end
+
+	#check params
+	begin
+		params.has_value?('subject')
+		   if params['subject'].empty? || params['subject'].nil?
+		   		return 'invalid subject'
+		   end
+	rescue
+			return 'missing "subject" parameter'
+	end
+
+	begin
+		params.has_value?('to')
+		   if params['to'].empty? || params['to'].nil?
+		   		return 'invalid "to" parameter'
+		   end
+	rescue
+			return 'missing "to" parameter'
+	end
+
+	begin
+		params.has_value?('body')
+		   if params['body'].empty? || params['body'].nil?
+		   		return 'invalid "body" parameter'
+		   end
+	rescue
+			return 'missing "body" parameter'
+	end
+
 
 	options = {
     :to => "#{params['to']}",
@@ -32,5 +65,11 @@ post '/sendemail' do
   	}
 }
 
-Pony.mail(options)
+begin
+	Pony.mail(options)
+	return 'Email successfully sent.'
+rescue
+	return 'Email send failed.'
+end
+
 end
