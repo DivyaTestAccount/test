@@ -1,6 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    haml (4.0.5)
+      tilt
+    json (1.8.1)
+    mail (2.6.1)
+      mime-types (>= 1.16, < 3)
+    mime-types (2.3)
+    pony (1.10)
+      mail (>= 2.0)
     rack (1.5.2)
     sinatra (1.1.0)
       rack (~> 1.1)
@@ -9,6 +17,10 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
+  haml
+  json
+  pony
   sinatra (= 1.1.0)
