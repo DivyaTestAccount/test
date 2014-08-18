@@ -14,8 +14,8 @@ end
 post '/sendemail' do
 	'sending email'
 	options = {
-    :to => 'divyasankaran@gmail.com',
-    :from => 'divyaemailtest@gmail.com',
+    :to => 'divyaemailtest@gmail.com',
+    :from => 'noreply@example.com',
     :subject => 'Test',
     :body => 'Test Again',
     :via => :smtp,
